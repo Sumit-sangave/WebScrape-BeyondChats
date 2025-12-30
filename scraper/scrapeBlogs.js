@@ -6,7 +6,7 @@ async function scrape() {
   try {
     console.log("Loading blogs page...");
 
-    const { data } = await axios.get("https://beyondchats.com/blog/");
+    const { data } = await axios.get("https://beyondchats.com/blogs/");
     const $ = cheerio.load(data);
 
     const blogLinks = [];
