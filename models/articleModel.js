@@ -1,10 +1,16 @@
 const pool = require("../db");
 
-exports.getAll = () => pool.query("SELECT * FROM articles");
-exports.getById = (id) =>
-  pool.query("SELECT * FROM articles WHERE id=$1", [id]);
-exports.update = (id, content) =>
-  pool.query(
-    "UPDATE articles SET content=$1, is_updated=true WHERE id=$2",
+exports.getAll = () => {
+  return pool.query("SELECT * FROM articles ORDER BY id DESC");
+};
+
+exports.getById = (id) => {
+  return pool.query("SELECT * FROM articles WHERE id = $1", [id]);
+};
+
+exports.update = (id, content) => {
+  return pool.query(
+    "UPDATE articles SET content=$1, is_updated=true WHERE id=$2 RETURNING *",
     [content, id]
   );
+};
